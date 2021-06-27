@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Step1.Leafletで地理院地図を表示する最も基本的なコード|Lefletの基本|埼玉大学谷謙二研究室</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
+  <script>
+    class World{
+        constructor(mapTagId){
+            //地図を表示するdiv要素のidを設定
+            this.map = L.map(mapTagId);
+            //地図の中心とズームレベルを指定
+            this.map.setView([34.98506, 135.7527], 18);
+            //表示するタイルレイヤのURLとAttributionコントロールの記述を設定して、地図に追加する
+            L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+                attribution: "<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"
+            }).addTo(this.map);
+            var marker = L.marker([34.98506, 135.7527]).addTo(this.map);
+            window.addEventListener("keydown", e=>{
+            switch(e.key){
+              case "ArrowLeft":{
+                const ll = marker.getLatLng();
+                ll.lng -= 0.00001;
+                marker.setLatLng(ll);
+                this.map.setView(ll);
+                break;
+              }
+              case "ArrowRight":{
+                const ll = marker.getLatLng();
+                ll.lng += 0.00001;
+                marker.setLatLng(ll);
+                this.map.setView(ll);
+                break;
+              }
+              case "ArrowUp":{
+                const ll = marker.getLatLng();
+                ll.lat += 0.00001;
+                marker.setLatLng(ll);
+                this.map.setView(ll);
+                break;
+              }
+              case "ArrowDown":{
+                const ll = marker.getLatLng();
+                ll.lat -= 0.00001;
+                marker.setLatLng(ll);
+                this.map.setView(ll);
+                break;
+              }
+            }
+          })
+        }
+    }
+    function init() {
+        var w = new World('mapcontainer');
+    }
+  </script>
+</head>
+<body onload="init()">
+  <div id="mapcontainer" style="width:600px;height:600px"></div>
+</body>
+</html>
