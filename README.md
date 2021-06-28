@@ -2,7 +2,7 @@
 
 ![sample.gif](sample.gif)
 
-##参考URL
+## 参考URL
 
 * https://ktgis.net/service/leafletlearn/index.html
   * 最初のサンプルコードを参考にしました。
