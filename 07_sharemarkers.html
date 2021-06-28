@@ -5,7 +5,7 @@
   <title>Step1.Leafletで地理院地図を表示する最も基本的なコード|Lefletの基本|埼玉大学谷謙二研究室</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
-  <script src="https://fungo.kcg.edu/madoi-20210627/js/madoi.js"></script>
+  <script src="https://fungo.kcg.edu/middleman-latest/middleman.js"></script>
   <script>
     class World{
         setMarkerPos(id, pos){
@@ -30,9 +30,9 @@
 
             this.selfId = generateUuid();
             this.markers = new Map();
-            var m = new madoi.Madoi("/rooms/mapsample-2323jlskf");
-            m.onOpen = e=>{
-                m.shareObject(this, [this.setMarkerPos]);
+            const mm = new Middleman(`/sessions/standard/mapsample-4iojfsf2`);
+            mm.shareObject(this, [this.setMarkerPos]);
+            mm.onopen = e=>{
                 this.setMarkerPos(this.selfId, [34.98506, 135.7527]);
             }
 
